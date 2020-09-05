@@ -43,7 +43,7 @@ public class FoodTruckApp {
 				FoodTruck foodTruck = new FoodTruck(tName, foodType, rating);
 				for (int j = 0; j < 5; j++) {
 					fTruckArr[i] = foodTruck;
-			}
+				}
 			}
 		}
 		showMenu(userInput, fTruckArr);
@@ -78,7 +78,7 @@ public class FoodTruckApp {
 				showAllTrucks(userInput, fTruckArr);
 				// display each truck
 				break;
-			case"2":
+			case "2":
 				userInput.nextLine();
 				getAverageTruckRating(userInput, fTruckArr);
 				break;
@@ -99,50 +99,82 @@ public class FoodTruckApp {
 		}
 	}
 
-
-	//call toString for each truck in our FoodTruck arr
+	// call toString for each truck in our FoodTruck arr
 	public void showAllTrucks(Scanner userInput, FoodTruck[] fTruckArr) {
 		for (int i = 0; i < fTruckArr.length; i++) {
-			if(fTruckArr[i] != null) {
-				System.out.println(fTruckArr[i].toString());				
-				}
+			if (fTruckArr[i] != null) {
+				System.out.println(fTruckArr[i].toString());
 			}
+		}
 		showMenu(userInput, fTruckArr);
 	}
-	
+
 	private void getAverageTruckRating(Scanner userInput, FoodTruck[] fTruckArr) {
-		//create a local variable to hold a sum and number of not null trucks
+		// create a local variable to hold a sum and number of not null trucks
 		int sum = 0;
 		int validTrucks = 0;
-		//iterate the food truck arr
-		//obtain the rating for each truck
+		// iterate the food truck arr
+		// obtain the rating for each truck
 		for (int i = 0; i < fTruckArr.length; i++) {
-			if(fTruckArr[i] != null) {
+			if (fTruckArr[i] != null) {
 				sum += fTruckArr[i].getTruckRating();
-				validTrucks ++;
+				validTrucks++;
 			}
 		}
-		System.out.println("The average truck rating is " + sum/validTrucks);
+		System.out.println("The average truck rating is " + sum / validTrucks);
 		showMenu(userInput, fTruckArr);
 	}
+
 	private void getHighestRatedTruck(Scanner userInput, FoodTruck[] fTruckArr) {
-		//create local variable to evaluate against
+		// create local variable to evaluate against
 		int highestRating = 0;
 		String truckName = "";
-		int arrPosition = 0;
 		int currentTruckRating = 0;
+		FoodTruck[] ft = new FoodTruck[5];
+		int countTrksWithHighestRate = 0;
+
+		// iterate the input array
 		for (int i = 0; i < fTruckArr.length; i++) {
-			if(fTruckArr[i] != null) {
+			// check for !null
+			if (fTruckArr[i] != null) {
+				// set local variable to this trucks rating
 				currentTruckRating = fTruckArr[i].getTruckRating();
-				if(currentTruckRating > highestRating) {
-				highestRating = currentTruckRating;
-				truckName = fTruckArr[i].getTruckName();
-				arrPosition = i;
+				// evaluate local variable against highestRating
+				if (currentTruckRating > highestRating) {
+					// if the current truck's rating is higher, save it's rating
+					highestRating = currentTruckRating;
+					// get the trucks name for string output
+					truckName = fTruckArr[i].getTruckName();
+					// in case another truck has the same rating add current truck to local truck
+					// array
+					ft[countTrksWithHighestRate] = fTruckArr[i];
+					// increment count
+					countTrksWithHighestRate++;
+
+				} // if more than one truck has the same highest rating
+				else if (currentTruckRating == highestRating) {
+					// add the current truck to the local truck array
+					ft[countTrksWithHighestRate] = fTruckArr[i];
+					// increment count
+					countTrksWithHighestRate++;
 				}
 			}
 		}
-		System.out.println("The " + truckName + " truck has the highest rating of a " + highestRating);
-		System.out.println(fTruckArr[arrPosition].toString());
+		// print out the local array holding all the trucks with the highest rating
+		if (ft.length == 1) {
+			System.out.println("The " + ft[0].getTruckName() + " truck has the highest rating of a " + highestRating);
+			System.out.println(ft[0].toString());
+		} else {
+			System.out.println("The following trucks had the highest rating of " + highestRating + ".");
+			for (int i = 0; i < ft.length; i++) {
+				if (ft[i] != null) {
+					if (ft[i].getTruckRating() == highestRating) {
+						System.out.println(ft[i].toString());
+					}
+				}
+			}
+
+		}
 		showMenu(userInput, fTruckArr);
 	}
 }
