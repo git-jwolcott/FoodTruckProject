@@ -1,10 +1,10 @@
-#Food Truck Project
+# Food Truck Project
 
-##Overview
-###Week 2 Homework
+## Overview
+### Week 2 Homework
 Users will input and rate a list of food trucks. The user can then select options from a menu to view all food trucks, view the average food truck rating, and lastly view the highest-rated trucks.
 
-##Topics
+## Topics
 * Java Fundamentals
 * Java 1
 * Obtaining user input
@@ -20,7 +20,7 @@ Users will input and rate a list of food trucks. The user can then select option
   - Get, Set, and toString methods
 * System exit
 
-##How To Run
+## How To Run
 1. Enter up to 5 trucks and their associated information (name, type of food, and rating).
 2. To enter less than 5 trucks, enter "quit" as a truck name.
 3. From the shown menu, enter the number for your choice.
